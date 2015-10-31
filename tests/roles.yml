@@ -1,0 +1,5 @@
+---
+# roles file for postgresql
+
+- src: https://github.com/pantarei/ansible-role-postgresql
+  name: postgresql

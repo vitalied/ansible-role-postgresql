@@ -1,0 +1,7 @@
+---
+# test file for postgresql
+
+- hosts: localhost
+  remote_user: root
+  roles:
+    - postgresql
