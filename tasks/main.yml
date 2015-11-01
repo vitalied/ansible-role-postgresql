@@ -3,6 +3,7 @@
 
 - name: apt-get update
   apt: update_cache=yes cache_valid_time=3600
+  notify: restart postgresql
   tags: postgresql
 
 - name: apt-get install
@@ -10,4 +11,10 @@
   with_items:
     - postgresql
     - python-psycopg2
+  notify: restart postgresql
+  tags: postgresql
+
+- name: enable service
+  service: name=postgresql enabled=yes
+  notify: restart postgresql
   tags: postgresql
