@@ -14,25 +14,6 @@
   notify: restart postgresql
   tags: postgresql
 
-- name: create postgresql user
-  become: yes
-  become_user: postgres
-  postgresql_user:
-    name={{ postgresql_username }}
-    password={{ postgresql_password }}
-    db={{ postgresql_database }}
-  tags: postgresql
-
-- name: create postgresql db
-  become: yes
-  become_user: postgres
-  postgresql_db:
-    name={{ postgresql_database }}
-    owner={{ postgresql_username }}
-    encoding={{ postgresql_encoding }}
-    template={{ postgresql_template }}
-  tags: postgresql
-
 - name: enable service
   service: name=postgresql enabled=yes
   notify: restart postgresql
