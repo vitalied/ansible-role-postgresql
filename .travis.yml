@@ -6,8 +6,6 @@ python: 2.7
 
 before_install:
   - pip install ansible
-  - sudo dpkg-reconfigure locales
-  - locale -a
 
 install:
   - ansible-galaxy install -r tests/roles.yml

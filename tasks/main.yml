@@ -30,8 +30,6 @@
     name={{ postgresql_database }}
     owner={{ postgresql_username }}
     encoding={{ postgresql_encoding }}
-    lc_collate={{ postgresql_lc_collate }}
-    lc_ctype={{ postgresql_lc_ctype }}
     template={{ postgresql_template }}
   tags: postgresql
 

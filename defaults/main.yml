@@ -4,8 +4,6 @@
 postgresql_database: postgres
 postgresql_encoding: UTF8
 postgresql_host: localhost
-postgresql_lc_collate: C
-postgresql_lc_ctype: C
 postgresql_password: kaiS9eik
 postgresql_template: template0
 postgresql_username: postgres
