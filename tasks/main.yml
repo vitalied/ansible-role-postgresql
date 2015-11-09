@@ -2,7 +2,7 @@
 # tasks file for postgresql
 
 - name: apt-get install
-  apt: name={{ item }} state=latest
+  apt: name="{{ item }}" state=latest
   with_items:
     - postgresql
     - python-psycopg2
