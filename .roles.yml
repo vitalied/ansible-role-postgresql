@@ -1,8 +1,4 @@
 ---
 # roles file for postgresql
 
-- src: https://github.com/pantarei/ansible-role-apt
-  name: apt
-
-- src: https://github.com/pantarei/ansible-role-postgresql
-  name: postgresql
+- src: hswong3i.postgresql
