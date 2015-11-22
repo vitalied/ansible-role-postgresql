@@ -7,9 +7,9 @@
     - postgresql
     - python-psycopg2
   notify: restart postgresql
-  tags: postgresql
+  tags: hswong3i.postgresql
 
 - name: enable service
   service: name=postgresql enabled=yes
   notify: restart postgresql
-  tags: postgresql
+  tags: hswong3i.postgresql
