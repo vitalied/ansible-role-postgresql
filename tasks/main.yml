@@ -2,7 +2,9 @@
 # tasks file for hswong3i.postgresql
 
 - name: apt-get install
-  apt: name="{{ item }}" state=latest
+  apt:
+    name="{{ item }}"
+    state=latest
   with_items:
     - libdbd-pg-perl
     - postgresql
