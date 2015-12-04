@@ -9,6 +9,7 @@
     - libdbd-pg-perl
     - postgresql
     - python-psycopg2
+    - ufw
   notify: restart postgresql
   tags: hswong3i.postgresql
 
