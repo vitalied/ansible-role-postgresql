@@ -23,8 +23,9 @@ postgresql_ssl_key_file: '/etc/ssl/private/ssl-cert-snakeoil.key'
 postgresql_timezone: 'UTC'
 postgresql_unix_socket_directories: '/var/run/postgresql'
 
-postgresql_hba:
-  - local all postgres peer
-  - local all all peer
-  - host all all 0.0.0.0/0 md5
-  - host all all ::0/0 md5
+postgresql_hba: [
+  'local all postgres peer',
+  'local all all peer',
+  'host all all 0.0.0.0/0 md5',
+  'host all all ::0/0 md5',
+]
