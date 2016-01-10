@@ -7,7 +7,9 @@
     state=latest
   with_items:
     - libdbd-pg-perl
-    - postgresql
+    - postgresql-9.3
+    - postgresql-client-9.3
+    - postgresql-contrib-9.3
     - python-psycopg2
     - ufw
   notify: restart postgresql
