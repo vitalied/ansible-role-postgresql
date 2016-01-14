@@ -2,9 +2,9 @@ Ansible Role for PostgreSQL
 ===========================
 
 [![Build Status](https://travis-ci.org/pantarei/ansible-role-postgresql.svg?branch=master)](https://travis-ci.org/pantarei/ansible-role-postgresql)
- [![GitHub tag](https://img.shields.io/github/tag/pantarei/ansible-role-postgresql.svg)](https://github.com/pantarei/ansible-role-postgresql)
- [![GitHub license](https://img.shields.io/github/license/pantarei/ansible-role-postgresql.svg)](https://github.com/pantarei/ansible-role-postgresql/blob/master/LICENSE)
- [![Ansible Role](https://img.shields.io/ansible/role/5980.svg)](https://galaxy.ansible.com/detail#/role/5980)
+[![GitHub tag](https://img.shields.io/github/tag/pantarei/ansible-role-postgresql.svg)](https://github.com/pantarei/ansible-role-postgresql)
+[![GitHub license](https://img.shields.io/github/license/pantarei/ansible-role-postgresql.svg)](https://github.com/pantarei/ansible-role-postgresql/blob/master/LICENSE)
+[![Ansible Role](https://img.shields.io/ansible/role/5980.svg)](https://galaxy.ansible.com/detail#/role/5980)
 
 Ansible Role for PostgreSQL Installation.
 
