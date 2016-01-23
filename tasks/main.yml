@@ -1,17 +1,40 @@
 ---
 # tasks file for hswong3i.postgresql
 
+- name: apt-key add
+  apt_key:
+    url="{{ item.url }}"
+    state="{{ item.state }}"
+  with_items:
+    - { url: 'https://www.postgresql.org/media/keys/ACCC4CF8.asc', state: 'present' }
+  notify: restart postgresql
+  tags: hswong3i.postgresql
+
+- name: apt-add-repository
+  apt_repository:
+    repo="{{ item.repo }}"
+    state="{{ item.state }}"
+  with_items:
+    - { repo: 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main', state: 'present' }
+  notify: restart postgresql
+  tags: hswong3i.postgresql
+
 - name: apt-get install
   apt:
-    name="{{ item }}"
-    state=latest
+    name="{{ item.name }}"
+    state="{{ item.state }}"
   with_items:
-    - libdbd-pg-perl
-    - postgresql-9.3
-    - postgresql-client-9.3
-    - postgresql-contrib-9.3
-    - python-psycopg2
-    - ufw
+    - { name: 'autopostgresqlbackup', state: 'latest' }
+    - { name: 'libdbd-pg-perl', state: 'latest' }
+    - { name: 'pgdg-keyring', state: 'latest' }
+    - { name: 'postgresql-9.3', state: 'absent' }
+    - { name: 'postgresql-9.5', state: 'latest' }
+    - { name: 'postgresql-client-9.3', state: 'absent' }
+    - { name: 'postgresql-client-9.5', state: 'latest' }
+    - { name: 'postgresql-contrib-9.3', state: 'absent' }
+    - { name: 'postgresql-contrib-9.5', state: 'latest' }
+    - { name: 'python-psycopg2', state: 'latest' }
+    - { name: 'ufw', state: 'latest' }
   notify: restart postgresql
   tags: hswong3i.postgresql
 
@@ -23,8 +46,8 @@
     group={{ item.group }}
     mode={{ item.mode }}
   with_items:
-    - { src: 'etc/postgresql/9.3/main/pg_hba.conf.j2', dest: '/etc/postgresql/9.3/main/pg_hba.conf',  owner: 'postgres', group: 'postgres', mode: '0644' }
-    - { src: 'etc/postgresql/9.3/main/postgresql.conf.j2', dest: '/etc/postgresql/9.3/main/postgresql.conf',  owner: 'postgres', group: 'postgres', mode: '0644' }
+    - { src: 'etc/postgresql/9.5/main/pg_hba.conf.j2', dest: '/etc/postgresql/9.5/main/pg_hba.conf',  owner: 'postgres', group: 'postgres', mode: '0644' }
+    - { src: 'etc/postgresql/9.5/main/postgresql.conf.j2', dest: '/etc/postgresql/9.5/main/postgresql.conf',  owner: 'postgres', group: 'postgres', mode: '0644' }
   notify: restart postgresql
   tags: hswong3i.postgresql
 

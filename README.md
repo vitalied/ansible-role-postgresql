@@ -173,20 +173,27 @@ Role Variables
 <td align="left">Specifies the name of the file containing the SSL server private key.</td>
 </tr>
 <tr class="even">
+<td align="left">postgresql_stats_temp_directory</td>
+<td align="left">yes</td>
+<td align="left">/var/run/postgresql/9.5-main.pg_stat_tmp</td>
+<td align="left"></td>
+<td align="left">Sets the directory to store temporary statistics data in.</td>
+</tr>
+<tr class="odd">
 <td align="left">postgresql_timezone</td>
 <td align="left">yes</td>
 <td align="left">UTC</td>
 <td align="left"></td>
 <td align="left">Sets the time zone for displaying and interpreting time stamps.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">postgresql_unix_socket_directories</td>
 <td align="left">yes</td>
 <td align="left">/var/run/postgresql</td>
 <td align="left"></td>
 <td align="left">Specifies the directory of the Unix-domain socket(s) on which the server is to listen for connections from client applications.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">postgresql_hba</td>
 <td align="left">yes</td>
 <td align="left"><a href="https://github.com/pantarei/ansible-role-postgresql/blob/master/defaults/main.yml">defaults/main.yml</a></td>
