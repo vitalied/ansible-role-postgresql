@@ -3,8 +3,8 @@
 
 - name: apt-key add
   apt_key:
-    url="{{ item.url }}"
-    state="{{ item.state }}"
+    url={{ item.url }}
+    state={{ item.state }}
   with_items:
     - { url: 'https://www.postgresql.org/media/keys/ACCC4CF8.asc', state: 'present' }
   notify: restart postgresql
@@ -12,8 +12,8 @@
 
 - name: apt-add-repository
   apt_repository:
-    repo="{{ item.repo }}"
-    state="{{ item.state }}"
+    repo={{ item.repo }}
+    state={{ item.state }}
   with_items:
     - { repo: 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main', state: 'present' }
   notify: restart postgresql
@@ -21,8 +21,8 @@
 
 - name: apt-get install
   apt:
-    name="{{ item.name }}"
-    state="{{ item.state }}"
+    name={{ item.name }}
+    state={{ item.state }}
   with_items:
     - { name: 'autopostgresqlbackup', state: 'latest' }
     - { name: 'libdbd-pg-perl', state: 'latest' }
@@ -58,10 +58,10 @@
 
 - name: enable incomming connection
   ufw:
-    to_port={{ item }}
-    proto=tcp
-    rule=allow
+    to_port={{ item.to_port }}
+    proto={{ item.proto }}
+    rule={{ item.rule }}
   with_items:
-    - "{{ postgresql_port }}"
+    - { to_port: "{{ postgresql_port }}", proto: 'tcp', rule: 'allow' }
   notify: restart postgresql
   tags: hswong3i.postgresql
