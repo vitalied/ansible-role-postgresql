@@ -6,7 +6,7 @@
     url={{ item.url }}
     state={{ item.state }}
   with_items:
-    - { url: 'https://www.postgresql.org/media/keys/ACCC4CF8.asc', state: 'present' }
+    - { state: 'present', url: 'https://www.postgresql.org/media/keys/ACCC4CF8.asc' }
   notify: restart postgresql
   tags: hswong3i.postgresql
 
@@ -15,7 +15,7 @@
     repo={{ item.repo }}
     state={{ item.state }}
   with_items:
-    - { repo: 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main', state: 'present' }
+    - { state: 'present', repo: 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' }
   notify: restart postgresql
   tags: hswong3i.postgresql
 
@@ -24,17 +24,17 @@
     name={{ item.name }}
     state={{ item.state }}
   with_items:
-    - { name: 'autopostgresqlbackup', state: 'latest' }
-    - { name: 'libdbd-pg-perl', state: 'latest' }
-    - { name: 'pgdg-keyring', state: 'latest' }
-    - { name: 'postgresql-9.3', state: 'absent' }
-    - { name: 'postgresql-9.5', state: 'latest' }
-    - { name: 'postgresql-client-9.3', state: 'absent' }
-    - { name: 'postgresql-client-9.5', state: 'latest' }
-    - { name: 'postgresql-contrib-9.3', state: 'absent' }
-    - { name: 'postgresql-contrib-9.5', state: 'latest' }
-    - { name: 'python-psycopg2', state: 'latest' }
-    - { name: 'ufw', state: 'latest' }
+    - { state: 'absent', name: 'postgresql-9.3' }
+    - { state: 'absent', name: 'postgresql-client-9.3' }
+    - { state: 'absent', name: 'postgresql-contrib-9.3' }
+    - { state: 'latest', name: 'autopostgresqlbackup' }
+    - { state: 'latest', name: 'libdbd-pg-perl' }
+    - { state: 'latest', name: 'pgdg-keyring' }
+    - { state: 'latest', name: 'postgresql-9.5' }
+    - { state: 'latest', name: 'postgresql-client-9.5' }
+    - { state: 'latest', name: 'postgresql-contrib-9.5' }
+    - { state: 'latest', name: 'python-psycopg2' }
+    - { state: 'latest', name: 'ufw' }
   notify: restart postgresql
   tags: hswong3i.postgresql
 
