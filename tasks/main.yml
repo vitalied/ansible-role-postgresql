@@ -1,58 +1,67 @@
 ---
-# tasks file for hswong3i.postgresql
+# tasks file for vitalied.postgresql
 
 - name: apt-key add
   apt_key:
-    url: "{{ item.url }}"
-    state: "{{ item.state }}"
+    url={{ item.url }}
+    state={{ item.state }}
   with_items:
-    - { state: "present", url: "https://www.postgresql.org/media/keys/ACCC4CF8.asc" }
+    - { state: 'present', url: 'https://www.postgresql.org/media/keys/ACCC4CF8.asc' }
   notify: restart postgresql
-  tags: hswong3i.postgresql
+  tags: vitalied.postgresql
 
 - name: apt-add-repository
   apt_repository:
-    repo: "{{ item.repo }}"
-    state: "{{ item.state }}"
+    repo={{ item.repo }}
+    state={{ item.state }}
   with_items:
-    - { state: "present", repo: "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" }
+    - { state: 'present', repo: 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' }
   notify: restart postgresql
-  tags: hswong3i.postgresql
+  tags: vitalied.postgresql
 
 - name: apt-get install
   apt:
-    name: "{{ item.name }}"
-    state: "{{ item.state }}"
+    name={{ item.name }}
+    state={{ item.state }}
   with_items:
-    - { state: "absent", name: "postgresql-9.3" }
-    - { state: "absent", name: "postgresql-client-9.3" }
-    - { state: "absent", name: "postgresql-contrib-9.3" }
-    - { state: "latest", name: "autopostgresqlbackup" }
-    - { state: "latest", name: "libdbd-pg-perl" }
-    - { state: "latest", name: "pgdg-keyring" }
-    - { state: "latest", name: "postgresql-9.5" }
-    - { state: "latest", name: "postgresql-client-9.5" }
-    - { state: "latest", name: "postgresql-contrib-9.5" }
-    - { state: "latest", name: "python-psycopg2" }
+    - { state: 'absent', name: 'postgresql-9.3' }
+    - { state: 'absent', name: 'postgresql-client-9.3' }
+    - { state: 'absent', name: 'postgresql-contrib-9.3' }
+    - { state: 'latest', name: 'autopostgresqlbackup' }
+    - { state: 'latest', name: 'libdbd-pg-perl' }
+    - { state: 'latest', name: 'pgdg-keyring' }
+    - { state: 'latest', name: 'postgresql-9.5' }
+    - { state: 'latest', name: 'postgresql-client-9.5' }
+    - { state: 'latest', name: 'postgresql-contrib-9.5' }
+    - { state: 'latest', name: 'python-psycopg2' }
+    - { state: 'latest', name: 'ufw' }
   notify: restart postgresql
-  tags: hswong3i.postgresql
+  tags: vitalied.postgresql
 
 - name: copy templates
   template:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    owner: "{{ item.owner }}"
-    group: "{{ item.group }}"
-    mode: "{{ item.mode }}"
+    src={{ item.src }}
+    dest={{ item.dest }}
+    owner={{ item.owner }}
+    group={{ item.group }}
+    mode={{ item.mode }}
   with_items:
-    - { src: "etc/postgresql/9.5/main/pg_hba.conf.j2", dest: "/etc/postgresql/9.5/main/pg_hba.conf",  owner: "postgres", group: "postgres", mode: "0644" }
-    - { src: "etc/postgresql/9.5/main/postgresql.conf.j2", dest: "/etc/postgresql/9.5/main/postgresql.conf",  owner: "postgres", group: "postgres", mode: "0644" }
+    - { src: 'etc/postgresql/9.5/main/pg_hba.conf.j2', dest: '/etc/postgresql/9.5/main/pg_hba.conf',  owner: 'postgres', group: 'postgres', mode: '0644' }
+    - { src: 'etc/postgresql/9.5/main/postgresql.conf.j2', dest: '/etc/postgresql/9.5/main/postgresql.conf',  owner: 'postgres', group: 'postgres', mode: '0644' }
   notify: restart postgresql
-  tags: hswong3i.postgresql
+  tags: vitalied.postgresql
 
 - name: enable service
-  service:
-    name: "postgresql"
-    enabled: "yes"
+  service: name=postgresql enabled=yes
   notify: restart postgresql
-  tags: hswong3i.postgresql
+  tags: vitalied.postgresql
+
+- name: enable incomming connection
+  ufw:
+    to_port={{ item.to_port }}
+    proto={{ item.proto }}
+    rule={{ item.rule }}
+  with_items:
+    - { to_port: "{{ postgresql_port }}", proto: 'tcp', rule: 'allow' }
+  notify: restart postgresql
+  tags: vitalied.postgresql

@@ -1,0 +1,4 @@
+---
+# roles file for vitalied.postgresql
+
+- src: vitalied.postgresql

@@ -1,5 +1,5 @@
 ---
-# defaults file for hswong3i.postgresql
+# defaults file for vitalied.postgresql
 
 postgresql_data_directory: "/var/lib/postgresql/9.5/main"
 postgresql_datestyle: "iso, mdy"
