@@ -1,9 +1,10 @@
 Ansible Role for PostgreSQL
 ===========================
 
-[![Build Status](https://travis-ci.org/pantarei/ansible-role-postgresql.svg?branch=master)](https://travis-ci.org/pantarei/ansible-role-postgresql)
-[![GitHub tag](https://img.shields.io/github/tag/pantarei/ansible-role-postgresql.svg)](https://github.com/pantarei/ansible-role-postgresql)
-[![GitHub license](https://img.shields.io/github/license/pantarei/ansible-role-postgresql.svg)](https://github.com/pantarei/ansible-role-postgresql/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/vitalied/ansible-role-postgresql.svg?branch=master)](https://travis-ci.org/vitalied/ansible-role-postgresql)
+[![GitHub tag](https://img.shields.io/github/tag/vitalied/ansible-role-postgresql.svg)](https://github.com/vitalied/ansible-role-postgresql)
+[![GitHub license](https://img.shields.io/github/license/vitalied/ansible-role-postgresql.svg)](https://github.com/vitalied/ansible-role-postgresql/blob/master/LICENSE)
+[![Ansible Role](https://img.shields.io/ansible/role/8527.svg)](https://galaxy.ansible.com/detail#/role/8527)
 
 Ansible Role for PostgreSQL Installation.
 
@@ -12,7 +13,7 @@ Requirements
 
 This role require Ansible 2.0 or higher.
 
-This role was designed for Ubuntu Server 14.04 LTS.
+This role was designed for Ubuntu Server 14.04+.
 
 Role Variables
 --------------
@@ -36,109 +37,43 @@ Role Variables
 </thead>
 <tbody>
 <tr class="odd">
-<td>postgresql_data_directory</td>
+<td>postgresql_version</td>
 <td>yes</td>
-<td>/var/lib/postgresql/9.3/main</td>
+<td>9.5</td>
 <td></td>
-<td>Specifies the directory to use for data storage.</td>
+<td>Specifies the postgresql version.</td>
 </tr>
 <tr class="even">
-<td>postgresql_datestyle</td>
+<td>postgresql_base_dir</td>
 <td>yes</td>
-<td>iso, mdy</td>
+<td>/srv/postgresql</td>
 <td></td>
-<td>Sets the display format for date and time values, as well as the rules for interpreting ambiguous date input values.</td>
+<td>
+  Specifies the directory that host data storage directory.
+  <br/>
+  Data storage directory will be: <code>postgresql_basedir + '/' + postgresql_version + '/main'</code>
+</td>
 </tr>
 <tr class="odd">
-<td>postgresql_default_text_search_config</td>
-<td>yes</td>
-<td>pg_catalog.english</td>
-<td></td>
-<td>Selects the text search configuration that is used by those variants of the text search functions that do not have an explicit argument specifying the configuration.</td>
-</tr>
-<tr class="even">
 <td>postgresql_external_pid_file</td>
 <td>yes</td>
-<td>/var/run/postgresql/9.3-main.pid</td>
+<td>/var/run/postgresql/9.5-main.pid</td>
 <td></td>
 <td>Specifies the name of an additional process-ID (PID) file that the server should create for use by server administration programs.</td>
 </tr>
-<tr class="odd">
-<td>postgresql_hba</td>
-<td>yes</td>
-<td><a href="https://github.com/pantarei/ansible-role-postgresql/blob/master/defaults/main.yml">defaults/main.yml</a></td>
-<td></td>
-<td>Host-based authentication setting.</td>
-</tr>
 <tr class="even">
-<td>postgresql_hba_file</td>
+<td>postgresql_unix_socket_directories</td>
 <td>yes</td>
-<td>/etc/postgresql/9.3/main/pg_hba.conf</td>
+<td>/var/run/postgresql</td>
 <td></td>
-<td>Specifies the configuration file for host-based authentication (customarily called pg_hba.conf).</td>
+<td>Specifies the directory of the Unix-domain socket(s) on which the server is to listen for connections from client applications.</td>
 </tr>
 <tr class="odd">
-<td>postgresql_ident_file</td>
-<td>yes</td>
-<td>/etc/postgresql/9.3/main/pg_ident.conf</td>
-<td></td>
-<td>Specifies the configuration file for Section 19.2 user name mapping (customarily called pg_ident.conf).</td>
-</tr>
-<tr class="even">
-<td>postgresql_lc_messages</td>
-<td>yes</td>
-<td>en_US.UTF-8</td>
-<td></td>
-<td>Sets the language in which messages are displayed.</td>
-</tr>
-<tr class="odd">
-<td>postgresql_lc_monetary</td>
-<td>yes</td>
-<td>en_US.UTF-8</td>
-<td></td>
-<td>Sets the locale to use for formatting monetary amounts, for example with the to_char family of functions.</td>
-</tr>
-<tr class="even">
-<td>postgresql_lc_numeric</td>
-<td>yes</td>
-<td>en_US.UTF-8</td>
-<td></td>
-<td>Sets the locale to use for formatting numbers, for example with the to_char family of functions.</td>
-</tr>
-<tr class="odd">
-<td>postgresql_lc_time</td>
-<td>yes</td>
-<td>en_US.UTF-8</td>
-<td></td>
-<td>Sets the locale to use for formatting dates and times, for example with the to_char family of functions.</td>
-</tr>
-<tr class="even">
 <td>postgresql_listen_addresses</td>
 <td>yes</td>
 <td>localhost</td>
 <td></td>
 <td>Specifies the TCP/IP address(es) on which the server is to listen for connections from client applications.</td>
-</tr>
-<tr class="odd">
-<td>postgresql_log_line_prefix</td>
-<td>yes</td>
-<td>%t</td>
-<td></td>
-<td>This is a printf-style string that is output at the beginning of each log line.</td>
-</tr>
-<tr class="even">
-<td>postgresql_log_timezone</td>
-<td>yes</td>
-<td>UTC</td>
-<td></td>
-<td>Sets the time zone used for timestamps written in the server log.</td>
-</tr>
-<tr class="odd">
-<td>postgresql_max_connections</td>
-<td>yes</td>
-<td>100</td>
-<td></td>
-<td>Determines the maximum number of concurrent connections to the database server.</td>
 </tr>
 <tr class="even">
 <td>postgresql_port</td>
@@ -148,13 +83,6 @@ Role Variables
 <td>The TCP port the server listens on; 5432 by default.</td>
 </tr>
 <tr class="odd">
-<td>postgresql_shared_buffers</td>
-<td>yes</td>
-<td>128MB</td>
-<td></td>
-<td>Sets the amount of memory the database server uses for shared memory buffers.</td>
-</tr>
-<tr class="even">
 <td>postgresql_ssl</td>
 <td>yes</td>
 <td>true</td>
@@ -164,40 +92,89 @@ Role Variables
 </ul></td>
 <td>Enables SSL connections.</td>
 </tr>
-<tr class="odd">
-<td>postgresql_ssl_cert_file</td>
+<tr class="even">
+<td>postgresql_max_connections</td>
 <td>yes</td>
-<td>/etc/ssl/certs/ssl-cert-snakeoil.pem</td>
+<td>100</td>
 <td></td>
-<td>Specifies the name of the file containing the SSL server certificate.</td>
+<td>Determines the maximum number of concurrent connections to the database server.</td>
+</tr>
+<tr class="odd">
+<td>postgresql_shared_buffers</td>
+<td>yes</td>
+<td>128MB</td>
+<td></td>
+<td>Sets the amount of memory the database server uses for shared memory buffers.</td>
 </tr>
 <tr class="even">
-<td>postgresql_ssl_key_file</td>
+<td>postgresql_effective_cache_size</td>
 <td>yes</td>
-<td>/etc/ssl/private/ssl-cert-snakeoil.key</td>
+<td>384MB</td>
 <td></td>
-<td>Specifies the name of the file containing the SSL server private key.</td>
+<td>configuration calculator for postgresql <a href="http://pgtune.leopard.in.ua">http://pgtune.leopard.in.ua</a></td>
 </tr>
 <tr class="odd">
-<td>postgresql_stats_temp_directory</td>
+<td>postgresql_work_mem</td>
 <td>yes</td>
-<td>/var/run/postgresql/9.5-main.pg_stat_tmp</td>
+<td>1310kB</td>
 <td></td>
-<td>Sets the directory to store temporary statistics data in.</td>
+<td>configuration calculator for postgresql <a href="http://pgtune.leopard.in.ua">http://pgtune.leopard.in.ua</a></td>
+</tr>
+<tr class="even">
+<td>postgresql_maintenance_work_mem</td>
+<td>yes</td>
+<td>32MB</td>
+<td></td>
+<td>configuration calculator for postgresql <a href="http://pgtune.leopard.in.ua">http://pgtune.leopard.in.ua</a></td>
+</tr>
+<tr class="odd">
+<td>postgresql_max_wal_size</td>
+<td>yes</td>
+<td>1GB</td>
+<td></td>
+<td>configuration calculator for postgresql <a href="http://pgtune.leopard.in.ua">http://pgtune.leopard.in.ua</a></td>
+</tr>
+<tr class="even">
+<td>postgresql_wal_buffers</td>
+<td>yes</td>
+<td>3932kB</td>
+<td></td>
+<td>configuration calculator for postgresql <a href="http://pgtune.leopard.in.ua">http://pgtune.leopard.in.ua</a></td>
+</tr>
+<tr class="odd">
+<td>postgresql_checkpoint_completion_target</td>
+<td>yes</td>
+<td>0.7</td>
+<td></td>
+<td>configuration calculator for postgresql <a href="http://pgtune.leopard.in.ua">http://pgtune.leopard.in.ua</a></td>
+</tr>
+<tr class="even">
+<td>postgresql_default_statistics_target</td>
+<td>yes</td>
+<td>100</td>
+<td></td>
+<td>configuration calculator for postgresql <a href="http://pgtune.leopard.in.ua">http://pgtune.leopard.in.ua</a></td>
+</tr>
+<tr class="odd">
+<td>postgresql_log_timezone</td>
+<td>yes</td>
+<td>localtime</td>
+<td></td>
+<td>Sets the time zone used for timestamps written in the server log.</td>
 </tr>
 <tr class="even">
 <td>postgresql_timezone</td>
 <td>yes</td>
-<td>UTC</td>
+<td>localtime</td>
 <td></td>
 <td>Sets the time zone for displaying and interpreting time stamps.</td>
 </tr>
 <tr class="odd">
-<td>postgresql_unix_socket_directories</td>
+<td>postgresql_hba</td>
 <td>yes</td>
-<td>/var/run/postgresql</td>
+<td><a href="https://github.com/vitalied/ansible-role-postgresql/blob/master/defaults/main.yml">defaults/main.yml</a></td>
 <td></td>
-<td>Specifies the directory of the Unix-domain socket(s) on which the server is to listen for connections from client applications.</td>
+<td>Host-based authentication setting.</td>
 </tr>
 </tbody>
 </table>
@@ -212,18 +189,10 @@ Example Playbook
 
     - hosts: all
       roles:
-        - role: hswong3i.postgresql
+        - role: vitalied.postgresql
 
 License
 -------
 
--   Code released under [MIT](https://github.com/pantarei/ansible-role-postgresql/blob/master/LICENSE)
+-   Code released under [MIT](https://github.com/vitalied/ansible-role-postgresql/blob/master/LICENSE)
 -   Docs released under [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/)
-
-Author Information
-------------------
-
--   Wong Hoi Sing Edison
-    -   <a href="https://twitter.com/hswong3i" class="uri" class="uri">https://twitter.com/hswong3i</a>
-    -   <a href="https://github.com/hswong3i" class="uri" class="uri">https://github.com/hswong3i</a>
-
