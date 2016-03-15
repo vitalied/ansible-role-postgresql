@@ -1,30 +1,53 @@
 ---
 # defaults file for vitalied.postgresql
 
-postgresql_data_directory: "/var/lib/postgresql/9.5/main"
-postgresql_datestyle: "iso, mdy"
-postgresql_default_text_search_config: "pg_catalog.english"
-postgresql_external_pid_file: "/var/run/postgresql/9.5-main.pid"
-postgresql_hba_file: "/etc/postgresql/9.5/main/pg_hba.conf"
-postgresql_ident_file: "/etc/postgresql/9.5/main/pg_ident.conf"
-postgresql_lc_messages: "en_US.UTF-8"
-postgresql_lc_monetary: "en_US.UTF-8"
-postgresql_lc_numeric: "en_US.UTF-8"
-postgresql_lc_time: "en_US.UTF-8"
-postgresql_listen_addresses: "*"
-postgresql_log_line_prefix: "%t [%p-%l] %q%u@%d "
-postgresql_log_timezone: "UTC"
-postgresql_max_connections: "100"
-postgresql_port: "5432"
-postgresql_shared_buffers: "128MB"
-postgresql_ssl: "true"
-postgresql_ssl_cert_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
-postgresql_ssl_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
-postgresql_stats_temp_directory: "/var/run/postgresql/9.5-main.pg_stat_tmp"
-postgresql_timezone: "UTC"
-postgresql_unix_socket_directories: "/var/run/postgresql"
+
+# postgresql.conf
+
+postgresql_version: '9.5'
+
+postgresql_apt_key_url: 'https://www.postgresql.org/media/keys/ACCC4CF8.asc'
+postgresql_add_apt_repo: 'deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main'
+
+postgresql_packages:
+  - autopostgresqlbackup
+  - python-psycopg2
+  - libpq-dev
+  - postgresql-{{ postgresql_version }}
+  - postgresql-contrib-{{ postgresql_version }}
+  - postgresql-client-{{ postgresql_version }}
+
+postgresql_base_dir: '/srv/postgresql'
+postgresql_old_base_dir: '/var/lib/postgresql'
+postgresql_data_dir: '{{ postgresql_base_dir }}/{{ postgresql_version }}/main'
+
+postgresql_external_pid_file: '/var/run/postgresql/{{ postgresql_version }}-main.pid'
+postgresql_unix_socket_directories: '/var/run/postgresql'
+
+postgresql_listen_addresses: 'localhost'
+postgresql_port: 5432
+
+postgresql_ssl: 'true'
+
+# configuration calculator for postgresql http://pgtune.leopard.in.ua/
+
+postgresql_max_connections: 100
+postgresql_shared_buffers: 128MB
+postgresql_effective_cache_size: 384MB
+postgresql_work_mem: 1310kB
+postgresql_maintenance_work_mem: 32MB
+postgresql_max_wal_size: 1GB
+postgresql_wal_buffers: 3932kB
+postgresql_checkpoint_completion_target: 0.7
+postgresql_default_statistics_target: 100
+
+postgresql_log_timezone: 'localtime'
+postgresql_timezone: 'localtime'
+
+
+# pg_hba.conf
 
 postgresql_hba: [
-  "host all all 0.0.0.0/0 md5",
-  "host all all ::0/0 md5",
+  #'host all all 0.0.0.0/0 md5'
+  #'hostssl all all 0.0.0.0/0 md5'
 ]
