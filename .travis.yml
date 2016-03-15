@@ -8,17 +8,24 @@ language: generic
 
 before_install:
   - sudo apt-get install -y software-properties-common
-  - sudo apt-add-repository -y ppa:fkrull/deadsnakes-python2.7
-  - sudo apt-get update
-  - sudo apt-get -y install python2.7
   - sudo apt-add-repository -y ppa:ansible/ansible
   - sudo apt-get update
   - sudo apt-get -y install ansible
 
+install:
+  - sudo ansible-galaxy install -r .roles.yml
+
 script:
+  # Check the role/playbook's syntax.
   - sudo ansible-playbook tests/test.yml -i tests/hosts --syntax-check
+  # Run the role/playbook with ansible-playbook.
   - sudo ansible-playbook tests/test.yml -i tests/hosts
-  - sudo ansible-playbook tests/test.yml -i tests/hosts | grep -q 'unreachable=0.*failed=0' && exit 0 || exit 1
+  # Run the role/playbook again, checking to make sure it's idempotent.
+  - >
+    sudo ansible-playbook tests/test.yml -i tests/hosts
+    | grep -q 'changed=0.*unreachable=0.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
