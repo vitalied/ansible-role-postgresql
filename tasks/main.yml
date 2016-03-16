@@ -3,65 +3,80 @@
 
 - name: apt-key add
   apt_key:
-    url={{ item.url }}
-    state={{ item.state }}
-  with_items:
-    - { state: 'present', url: 'https://www.postgresql.org/media/keys/ACCC4CF8.asc' }
-  notify: restart postgresql
+    url={{ postgresql_apt_key_url }}
+    state=present
   tags: vitalied.postgresql
 
 - name: apt-add-repository
   apt_repository:
-    repo={{ item.repo }}
-    state={{ item.state }}
-  with_items:
-    - { state: 'present', repo: 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' }
-  notify: restart postgresql
+    filename=postgresql
+    repo={{ postgresql_add_apt_repo }}
+    state=present
   tags: vitalied.postgresql
 
 - name: apt-get install
   apt:
-    name={{ item.name }}
-    state={{ item.state }}
-  with_items:
-    - { state: 'absent', name: 'postgresql-9.3' }
-    - { state: 'absent', name: 'postgresql-client-9.3' }
-    - { state: 'absent', name: 'postgresql-contrib-9.3' }
-    - { state: 'latest', name: 'autopostgresqlbackup' }
-    - { state: 'latest', name: 'libdbd-pg-perl' }
-    - { state: 'latest', name: 'pgdg-keyring' }
-    - { state: 'latest', name: 'postgresql-9.5' }
-    - { state: 'latest', name: 'postgresql-client-9.5' }
-    - { state: 'latest', name: 'postgresql-contrib-9.5' }
-    - { state: 'latest', name: 'python-psycopg2' }
-    - { state: 'latest', name: 'ufw' }
+    name={{ item }}
+    state=latest
+  with_items: '{{ postgresql_packages }}'
   notify: restart postgresql
   tags: vitalied.postgresql
 
-- name: copy templates
+- name: check if new DB directory is empty
+  stat: path={{ postgresql_data_dir }}/PG_VERSION
+  register: postgresql_data_moved
+  tags: vitalied.postgresql
+
+- block:
+  - name: stop postgresql
+    service:
+      name=postgresql
+      state=stopped
+    register: postgresql_stopped
+
+  - name: create postgresql base directory
+    file:
+      path={{ postgresql_base_dir }}
+      state=directory
+      owner=postgres
+      group=postgres
+
+  - name: move DB data to new directory
+    command: mv {{ postgresql_old_base_dir }}/{{ postgresql_version }} {{ postgresql_base_dir }}
+
+  when: not postgresql_data_moved.stat.exists and postgresql_base_dir != postgresql_old_base_dir
+  tags: vitalied.postgresql
+
+- name: copy postgresql configuration
   template:
-    src={{ item.src }}
-    dest={{ item.dest }}
-    owner={{ item.owner }}
-    group={{ item.group }}
-    mode={{ item.mode }}
-  with_items:
-    - { src: 'etc/postgresql/9.5/main/pg_hba.conf.j2', dest: '/etc/postgresql/9.5/main/pg_hba.conf',  owner: 'postgres', group: 'postgres', mode: '0644' }
-    - { src: 'etc/postgresql/9.5/main/postgresql.conf.j2', dest: '/etc/postgresql/9.5/main/postgresql.conf',  owner: 'postgres', group: 'postgres', mode: '0644' }
+    src=etc/postgresql/postgresql.conf.j2
+    dest=/etc/postgresql/{{ postgresql_version }}/main/postgresql.conf
+    owner=postgres
+    group=postgres
+    mode=0644
   notify: restart postgresql
   tags: vitalied.postgresql
 
-- name: enable service
-  service: name=postgresql enabled=yes
+- name: copy postgresql security configuration
+  template:
+    src=etc/postgresql/pg_hba.conf.j2
+    dest=/etc/postgresql/{{ postgresql_version }}/main/pg_hba.conf
+    owner=postgres
+    group=postgres
+    mode=0644
   notify: restart postgresql
   tags: vitalied.postgresql
 
-- name: enable incomming connection
-  ufw:
-    to_port={{ item.to_port }}
-    proto={{ item.proto }}
-    rule={{ item.rule }}
-  with_items:
-    - { to_port: "{{ postgresql_port }}", proto: 'tcp', rule: 'allow' }
+- name: enable postgresql service
+  service:
+    name=postgresql
+    enabled=yes
   notify: restart postgresql
+  tags: vitalied.postgresql
+
+- name: start postgresql
+  service:
+    name=postgresql
+    state=started
+  when: postgresql_stopped.changed
   tags: vitalied.postgresql
