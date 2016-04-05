@@ -2,4 +2,6 @@
 # handlers file for hswong3i.postgresql
 
 - name: restart postgresql
-  service: name=postgresql state=restarted
+  service:
+    name: "postgresql"
+    state: "restarted"

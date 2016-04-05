@@ -1,30 +1,30 @@
 ---
 # defaults file for hswong3i.postgresql
 
-postgresql_data_directory: '/var/lib/postgresql/9.5/main'
-postgresql_datestyle: 'iso, mdy'
-postgresql_default_text_search_config: 'pg_catalog.english'
-postgresql_external_pid_file: '/var/run/postgresql/9.5-main.pid'
-postgresql_hba_file: '/etc/postgresql/9.5/main/pg_hba.conf'
-postgresql_ident_file: '/etc/postgresql/9.5/main/pg_ident.conf'
-postgresql_lc_messages: 'en_US.UTF-8'
-postgresql_lc_monetary: 'en_US.UTF-8'
-postgresql_lc_numeric: 'en_US.UTF-8'
-postgresql_lc_time: 'en_US.UTF-8'
-postgresql_listen_addresses: '*'
-postgresql_log_line_prefix: '%t [%p-%l] %q%u@%d '
-postgresql_log_timezone: 'UTC'
+postgresql_data_directory: "/var/lib/postgresql/9.5/main"
+postgresql_datestyle: "iso, mdy"
+postgresql_default_text_search_config: "pg_catalog.english"
+postgresql_external_pid_file: "/var/run/postgresql/9.5-main.pid"
+postgresql_hba_file: "/etc/postgresql/9.5/main/pg_hba.conf"
+postgresql_ident_file: "/etc/postgresql/9.5/main/pg_ident.conf"
+postgresql_lc_messages: "en_US.UTF-8"
+postgresql_lc_monetary: "en_US.UTF-8"
+postgresql_lc_numeric: "en_US.UTF-8"
+postgresql_lc_time: "en_US.UTF-8"
+postgresql_listen_addresses: "*"
+postgresql_log_line_prefix: "%t [%p-%l] %q%u@%d "
+postgresql_log_timezone: "UTC"
 postgresql_max_connections: 100
 postgresql_port: 5432
 postgresql_shared_buffers: 128MB
-postgresql_ssl: 'true'
-postgresql_ssl_cert_file: '/etc/ssl/certs/ssl-cert-snakeoil.pem'
-postgresql_ssl_key_file: '/etc/ssl/private/ssl-cert-snakeoil.key'
-postgresql_stats_temp_directory: '/var/run/postgresql/9.5-main.pg_stat_tmp'
-postgresql_timezone: 'UTC'
-postgresql_unix_socket_directories: '/var/run/postgresql'
+postgresql_ssl: "true"
+postgresql_ssl_cert_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
+postgresql_ssl_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
+postgresql_stats_temp_directory: "/var/run/postgresql/9.5-main.pg_stat_tmp"
+postgresql_timezone: "UTC"
+postgresql_unix_socket_directories: "/var/run/postgresql"
 
 postgresql_hba: [
-  'host all all 0.0.0.0/0 md5',
-  'host all all ::0/0 md5',
+  "host all all 0.0.0.0/0 md5",
+  "host all all ::0/0 md5",
 ]
