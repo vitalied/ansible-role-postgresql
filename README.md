@@ -28,177 +28,177 @@ Role Variables
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">parameter</th>
-<th align="left">required</th>
-<th align="left">default</th>
-<th align="left">choices</th>
-<th align="left">comments</th>
+<th>parameter</th>
+<th>required</th>
+<th>default</th>
+<th>choices</th>
+<th>comments</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">postgresql_data_directory</td>
-<td align="left">yes</td>
-<td align="left">/var/lib/postgresql/9.3/main</td>
-<td align="left"></td>
-<td align="left">Specifies the directory to use for data storage.</td>
+<td>postgresql_data_directory</td>
+<td>yes</td>
+<td>/var/lib/postgresql/9.3/main</td>
+<td></td>
+<td>Specifies the directory to use for data storage.</td>
 </tr>
 <tr class="even">
-<td align="left">postgresql_datestyle</td>
-<td align="left">yes</td>
-<td align="left">iso, mdy</td>
-<td align="left"></td>
-<td align="left">Sets the display format for date and time values, as well as the rules for interpreting ambiguous date input values.</td>
+<td>postgresql_datestyle</td>
+<td>yes</td>
+<td>iso, mdy</td>
+<td></td>
+<td>Sets the display format for date and time values, as well as the rules for interpreting ambiguous date input values.</td>
 </tr>
 <tr class="odd">
-<td align="left">postgresql_default_text_search_config</td>
-<td align="left">yes</td>
-<td align="left">pg_catalog.english</td>
-<td align="left"></td>
-<td align="left">Selects the text search configuration that is used by those variants of the text search functions that do not have an explicit argument specifying the configuration.</td>
+<td>postgresql_default_text_search_config</td>
+<td>yes</td>
+<td>pg_catalog.english</td>
+<td></td>
+<td>Selects the text search configuration that is used by those variants of the text search functions that do not have an explicit argument specifying the configuration.</td>
 </tr>
 <tr class="even">
-<td align="left">postgresql_external_pid_file</td>
-<td align="left">yes</td>
-<td align="left">/var/run/postgresql/9.3-main.pid</td>
-<td align="left"></td>
-<td align="left">Specifies the name of an additional process-ID (PID) file that the server should create for use by server administration programs.</td>
+<td>postgresql_external_pid_file</td>
+<td>yes</td>
+<td>/var/run/postgresql/9.3-main.pid</td>
+<td></td>
+<td>Specifies the name of an additional process-ID (PID) file that the server should create for use by server administration programs.</td>
 </tr>
 <tr class="odd">
-<td align="left">postgresql_hba_file</td>
-<td align="left">yes</td>
-<td align="left">/etc/postgresql/9.3/main/pg_hba.conf</td>
-<td align="left"></td>
-<td align="left">Specifies the configuration file for host-based authentication (customarily called pg_hba.conf).</td>
+<td>postgresql_hba_file</td>
+<td>yes</td>
+<td>/etc/postgresql/9.3/main/pg_hba.conf</td>
+<td></td>
+<td>Specifies the configuration file for host-based authentication (customarily called pg_hba.conf).</td>
 </tr>
 <tr class="even">
-<td align="left">postgresql_ident_file</td>
-<td align="left">yes</td>
-<td align="left">/etc/postgresql/9.3/main/pg_ident.conf</td>
-<td align="left"></td>
-<td align="left">Specifies the configuration file for Section 19.2 user name mapping (customarily called pg_ident.conf).</td>
+<td>postgresql_ident_file</td>
+<td>yes</td>
+<td>/etc/postgresql/9.3/main/pg_ident.conf</td>
+<td></td>
+<td>Specifies the configuration file for Section 19.2 user name mapping (customarily called pg_ident.conf).</td>
 </tr>
 <tr class="odd">
-<td align="left">postgresql_lc_messages</td>
-<td align="left">yes</td>
-<td align="left">en_US.UTF-8</td>
-<td align="left"></td>
-<td align="left">Sets the language in which messages are displayed.</td>
+<td>postgresql_lc_messages</td>
+<td>yes</td>
+<td>en_US.UTF-8</td>
+<td></td>
+<td>Sets the language in which messages are displayed.</td>
 </tr>
 <tr class="even">
-<td align="left">postgresql_lc_monetary</td>
-<td align="left">yes</td>
-<td align="left">en_US.UTF-8</td>
-<td align="left"></td>
-<td align="left">Sets the locale to use for formatting monetary amounts, for example with the to_char family of functions.</td>
+<td>postgresql_lc_monetary</td>
+<td>yes</td>
+<td>en_US.UTF-8</td>
+<td></td>
+<td>Sets the locale to use for formatting monetary amounts, for example with the to_char family of functions.</td>
 </tr>
 <tr class="odd">
-<td align="left">postgresql_lc_numeric</td>
-<td align="left">yes</td>
-<td align="left">en_US.UTF-8</td>
-<td align="left"></td>
-<td align="left">Sets the locale to use for formatting numbers, for example with the to_char family of functions.</td>
+<td>postgresql_lc_numeric</td>
+<td>yes</td>
+<td>en_US.UTF-8</td>
+<td></td>
+<td>Sets the locale to use for formatting numbers, for example with the to_char family of functions.</td>
 </tr>
 <tr class="even">
-<td align="left">postgresql_lc_time</td>
-<td align="left">yes</td>
-<td align="left">en_US.UTF-8</td>
-<td align="left"></td>
-<td align="left">Sets the locale to use for formatting dates and times, for example with the to_char family of functions.</td>
+<td>postgresql_lc_time</td>
+<td>yes</td>
+<td>en_US.UTF-8</td>
+<td></td>
+<td>Sets the locale to use for formatting dates and times, for example with the to_char family of functions.</td>
 </tr>
 <tr class="odd">
-<td align="left">postgresql_listen_addresses</td>
-<td align="left">yes</td>
-<td align="left">localhost</td>
-<td align="left"></td>
-<td align="left">Specifies the TCP/IP address(es) on which the server is to listen for connections from client applications.</td>
+<td>postgresql_listen_addresses</td>
+<td>yes</td>
+<td>localhost</td>
+<td></td>
+<td>Specifies the TCP/IP address(es) on which the server is to listen for connections from client applications.</td>
 </tr>
 <tr class="even">
-<td align="left">postgresql_log_line_prefix</td>
-<td align="left">yes</td>
-<td align="left">%t</td>
-<td align="left"></td>
-<td align="left">This is a printf-style string that is output at the beginning of each log line.</td>
+<td>postgresql_log_line_prefix</td>
+<td>yes</td>
+<td>%t</td>
+<td></td>
+<td>This is a printf-style string that is output at the beginning of each log line.</td>
 </tr>
 <tr class="odd">
-<td align="left">postgresql_log_timezone</td>
-<td align="left">yes</td>
-<td align="left">UTC</td>
-<td align="left"></td>
-<td align="left">Sets the time zone used for timestamps written in the server log.</td>
+<td>postgresql_log_timezone</td>
+<td>yes</td>
+<td>UTC</td>
+<td></td>
+<td>Sets the time zone used for timestamps written in the server log.</td>
 </tr>
 <tr class="even">
-<td align="left">postgresql_max_connections</td>
-<td align="left">yes</td>
-<td align="left">100</td>
-<td align="left"></td>
-<td align="left">Determines the maximum number of concurrent connections to the database server.</td>
+<td>postgresql_max_connections</td>
+<td>yes</td>
+<td>100</td>
+<td></td>
+<td>Determines the maximum number of concurrent connections to the database server.</td>
 </tr>
 <tr class="odd">
-<td align="left">postgresql_port</td>
-<td align="left">yes</td>
-<td align="left">5432</td>
-<td align="left"></td>
-<td align="left">The TCP port the server listens on; 5432 by default.</td>
+<td>postgresql_port</td>
+<td>yes</td>
+<td>5432</td>
+<td></td>
+<td>The TCP port the server listens on; 5432 by default.</td>
 </tr>
 <tr class="even">
-<td align="left">postgresql_shared_buffers</td>
-<td align="left">yes</td>
-<td align="left">128MB</td>
-<td align="left"></td>
-<td align="left">Sets the amount of memory the database server uses for shared memory buffers.</td>
+<td>postgresql_shared_buffers</td>
+<td>yes</td>
+<td>128MB</td>
+<td></td>
+<td>Sets the amount of memory the database server uses for shared memory buffers.</td>
 </tr>
 <tr class="odd">
-<td align="left">postgresql_ssl</td>
-<td align="left">yes</td>
-<td align="left">true</td>
-<td align="left"><ul>
+<td>postgresql_ssl</td>
+<td>yes</td>
+<td>true</td>
+<td><ul>
 <li>true</li>
 <li>false</li>
 </ul></td>
-<td align="left">Enables SSL connections.</td>
+<td>Enables SSL connections.</td>
 </tr>
 <tr class="even">
-<td align="left">postgresql_ssl_cert_file</td>
-<td align="left">yes</td>
-<td align="left">/etc/ssl/certs/ssl-cert-snakeoil.pem</td>
-<td align="left"></td>
-<td align="left">Specifies the name of the file containing the SSL server certificate.</td>
+<td>postgresql_ssl_cert_file</td>
+<td>yes</td>
+<td>/etc/ssl/certs/ssl-cert-snakeoil.pem</td>
+<td></td>
+<td>Specifies the name of the file containing the SSL server certificate.</td>
 </tr>
 <tr class="odd">
-<td align="left">postgresql_ssl_key_file</td>
-<td align="left">yes</td>
-<td align="left">/etc/ssl/private/ssl-cert-snakeoil.key</td>
-<td align="left"></td>
-<td align="left">Specifies the name of the file containing the SSL server private key.</td>
+<td>postgresql_ssl_key_file</td>
+<td>yes</td>
+<td>/etc/ssl/private/ssl-cert-snakeoil.key</td>
+<td></td>
+<td>Specifies the name of the file containing the SSL server private key.</td>
 </tr>
 <tr class="even">
-<td align="left">postgresql_stats_temp_directory</td>
-<td align="left">yes</td>
-<td align="left">/var/run/postgresql/9.5-main.pg_stat_tmp</td>
-<td align="left"></td>
-<td align="left">Sets the directory to store temporary statistics data in.</td>
+<td>postgresql_stats_temp_directory</td>
+<td>yes</td>
+<td>/var/run/postgresql/9.5-main.pg_stat_tmp</td>
+<td></td>
+<td>Sets the directory to store temporary statistics data in.</td>
 </tr>
 <tr class="odd">
-<td align="left">postgresql_timezone</td>
-<td align="left">yes</td>
-<td align="left">UTC</td>
-<td align="left"></td>
-<td align="left">Sets the time zone for displaying and interpreting time stamps.</td>
+<td>postgresql_timezone</td>
+<td>yes</td>
+<td>UTC</td>
+<td></td>
+<td>Sets the time zone for displaying and interpreting time stamps.</td>
 </tr>
 <tr class="even">
-<td align="left">postgresql_unix_socket_directories</td>
-<td align="left">yes</td>
-<td align="left">/var/run/postgresql</td>
-<td align="left"></td>
-<td align="left">Specifies the directory of the Unix-domain socket(s) on which the server is to listen for connections from client applications.</td>
+<td>postgresql_unix_socket_directories</td>
+<td>yes</td>
+<td>/var/run/postgresql</td>
+<td></td>
+<td>Specifies the directory of the Unix-domain socket(s) on which the server is to listen for connections from client applications.</td>
 </tr>
 <tr class="odd">
-<td align="left">postgresql_hba</td>
-<td align="left">yes</td>
-<td align="left"><a href="https://github.com/pantarei/ansible-role-postgresql/blob/master/defaults/main.yml">defaults/main.yml</a></td>
-<td align="left"></td>
-<td align="left">Host-based authentication setting.</td>
+<td>postgresql_hba</td>
+<td>yes</td>
+<td><a href="https://github.com/pantarei/ansible-role-postgresql/blob/master/defaults/main.yml">defaults/main.yml</a></td>
+<td></td>
+<td>Host-based authentication setting.</td>
 </tr>
 </tbody>
 </table>
@@ -225,6 +225,6 @@ Author Information
 ------------------
 
 -   Wong Hoi Sing Edison
-    -   <https://twitter.com/hswong3i>
-    -   <https://github.com/hswong3i>
+    -   <a href="https://twitter.com/hswong3i" class="uri" class="uri">https://twitter.com/hswong3i</a>
+    -   <a href="https://github.com/hswong3i" class="uri" class="uri">https://github.com/hswong3i</a>
 
