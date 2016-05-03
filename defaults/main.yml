@@ -14,9 +14,9 @@ postgresql_lc_time: "en_US.UTF-8"
 postgresql_listen_addresses: "*"
 postgresql_log_line_prefix: "%t [%p-%l] %q%u@%d "
 postgresql_log_timezone: "UTC"
-postgresql_max_connections: 100
-postgresql_port: 5432
-postgresql_shared_buffers: 128MB
+postgresql_max_connections: "100"
+postgresql_port: "5432"
+postgresql_shared_buffers: "128MB"
 postgresql_ssl: "true"
 postgresql_ssl_cert_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
 postgresql_ssl_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
