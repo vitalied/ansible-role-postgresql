@@ -34,7 +34,6 @@
     - { state: "latest", name: "postgresql-client-9.5" }
     - { state: "latest", name: "postgresql-contrib-9.5" }
     - { state: "latest", name: "python-psycopg2" }
-    - { state: "latest", name: "ufw" }
   notify: restart postgresql
   tags: hswong3i.postgresql
 
@@ -55,15 +54,5 @@
   service:
     name: "postgresql"
     enabled: "yes"
-  notify: restart postgresql
-  tags: hswong3i.postgresql
-
-- name: enable incomming connection
-  ufw:
-    to_port: "{{ item.to_port }}"
-    proto: "{{ item.proto }}"
-    rule: "{{ item.rule }}"
-  with_items:
-    - { to_port: "{{ postgresql_port }}", proto: "tcp", rule: "allow" }
   notify: restart postgresql
   tags: hswong3i.postgresql
